@@ -40,7 +40,7 @@ tornado==6.4
 typing_extensions==4.9.0
 tzdata==2023.4
 tzlocal==5.2
-scipy==1.7.0
+scipy==23.2.1
 urllib3==2.2.0
 validators==0.22.0
 watchdog==3.0.0
