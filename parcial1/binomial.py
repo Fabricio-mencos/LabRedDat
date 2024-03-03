@@ -28,6 +28,7 @@ st.markdown("""Donde:
 st.markdown(""" En el caso de esta paágina de streamlit, lo que se realizó fue: Crear tres inputs para que el usuario pueda ingresar la probabilidad de que el evento deseado suceda, la cantidad de intentos y la cantidad de intentos que se desea que sean exitosos. Tras esto se utilizó la libreria scipy para calcular la distribución binomial y plotearla dentro de la gráfica que se muestra en la parte de abajo, la cual cambiará dependiendo de los valores que el usuario ingrese. En cuanto a los widget inputs que se utilizaron, estos fueron solamente tres number inputs, los cuales tienen limitados los números que pueden ser elegidos para que no se generen errores a la hora de hacer los cálculos.""")
 st.sidebar.header("Ingreso de Datos")
 st.sidebar.markdown("""Esta sección esta destinada para ingresar los datos necesarios para calcular una distribución binomial. Apartir de los datos que sean ingresados en cada recuadro, se le mostrará la distribución binomial equivalente a esos""")
+st.sidebar.image("ECFMLOGO.png")
 
 #Aquí vamos a solicitar al usuario que ingrese todos los datos necesarios para calcular la distribución
 prob_exit=st.sidebar.number_input(f"Ingresar la probabilidad de encontrar", min_value=0.00, max_value=1.00,step=0.01, value=0.5)
@@ -35,7 +36,6 @@ num_intentos=st.sidebar.number_input(f"Ingresar el número de intentos", min_val
 num_exit=st.sidebar.number_input(f"Ingrese el número de casos exitosos deseados", min_value=0, max_value=90, step=1, value=5)
 
 #Agragamos el logo de la escuela para que se vea elegante
-#st.sidebar.image("ECFMLOGO.png")
 
 #Aquí usamos scipy para calcular la probabilidad de obtener cierto resultado
 x = list(range(num_intentos + 1))
