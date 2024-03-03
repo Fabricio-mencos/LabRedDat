@@ -1,11 +1,8 @@
 #Primero, importamos todas las librerias necesarias
-from matplotlib import pyplot as plt
 import numpy as np
 import pandas as pd
 import plotly.express as px
-import math
 import streamlit as st
-import streamlit.components.v1 as components
 from scipy.stats import binom
 
 #Ahora, haremos los ajustes necesarios para la pagina de streamlit
