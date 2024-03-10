@@ -1,5 +1,3 @@
-import openpyxl
-from tabulate import tabulate
 import pandas as pd
 import numpy as np
 import streamlit as st
