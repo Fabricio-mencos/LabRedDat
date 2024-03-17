@@ -3,8 +3,12 @@ import numpy as np
 import streamlit as st
 from streamlit_option_menu import option_menu
 import matplotlib.pyplot as plt
-import plotly.express as px
+from scipy.stats import binom
+from scipy.optimize import curve_fit
 
+
+
+#Nombre e ícono de la pestaña
 st.set_page_config(page_title="Practica 1: Distribución Binomial", page_icon="🌍", layout="wide")
 with st.sidebar:
     selected=option_menu(
@@ -16,15 +20,49 @@ with st.sidebar:
     )
 
 if selected == "Principal":
+    def binomial_distribution(x, n, p):
+        return binom.pmf(x, n, p)
     st.markdown("<h1 style='text-align: center; color: #A2BDF1;'>Distribución Binomial: Lanzamiento de monedas</h1>", unsafe_allow_html=True)
-    data = pd.read_csv('https://raw.githubusercontent.com/JARA99/F503-2024-public/main/Unidades/2-Distribuciones/Binomial-fichas.csv')
-    print(data)
+    data = pd.read_csv('https://raw.githubusercontent.com/Fabricio-mencos/LabRedDat/main/Practicas/Practica1/Copia%20de%20ConteosDeCarasPorPareja%20-%20Sheet1%20(1).csv')
+    
+    #cantidad de tiros
     m = st.slider('Seleccione la cantidad de tiros (m)', 0, 100, value=100)
     m_t = data.head(m)
-    grafica = px.histogram(m_t, 'DF')
-    st.plotly_chart(grafica)
+
+    #Aquí calculamos el promedio de los datos y su desviación estandar
+    pro = np.mean(m_t)
+    desv_estd = np.std(m_t, ddof=1)
+    
+    # Crear histograma
+    fig, ax = plt.subplots(figsize=(10, 6))
+    hist, bins, _ = ax.hist(m_t['DF'], bins=np.arange(min(m_t['DF']), max(m_t['DF']) + 1.5) - 0.5, alpha=0.7, label='Datos', color='blue', density=True)
+    
+    # Ajuste de la distribución binomial a los datos
+    x_values = np.linspace(0, max(m_t['DF']), len(hist))
+    params, _ = curve_fit(binomial_distribution, x_values, hist)
+    
+    # Trazar la distribución binomial ajustada
+    ax.plot(x_values, binomial_distribution(x_values, *params), marker='o', linestyle='-', color='orange', label='Distribución Binomial')
+    
+    # Configuración de la gráfica
+    ax.set_xlabel('Número de éxitos')
+    ax.set_ylabel('Densidad de probabilidad')
+    ax.set_title('Histograma y distribución binomial')
+    ax.legend()
+    
+    # Mostrar la gráfica en Streamlit
+    st.pyplot(fig)
+
+    #Mostramos el promedio y la desviación estandar calculados
+    if pro is not None:
+        st.success(f"**El promedio de los datos ingresados es: {pro}**")
+    if desv_estd is not None:
+        st.success(f"**La desviación estandar para los datos ingresados es: {desv_estd}**")
     st.divider()
-    st.table(m_t)
+    with st.expander("Click para ver la tabla de datos"):
+        st.table(m_t)
+    
+
 
 if selected == "Teoria":
     st.markdown("<h1 style='text-align: center; color: #A2BDF1;'>Teoria de la Distribución Binomial</h1>", unsafe_allow_html=True)  
