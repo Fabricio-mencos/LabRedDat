@@ -32,7 +32,7 @@ if selected == "Principal":
     def binomial_distribution(x, n, p):
         return binom.pmf(x, n, p)
     st.markdown("<h1 style='text-align: center; color: #A2BDF1;'>Distribución Binomial: Lanzamiento de monedas</h1>", unsafe_allow_html=True)
-    st.markdown("""Esta primera gráfica, muestra los resultados obtenidos en 100 lanzamientos hechos por Dessiré y Fabricio. En la inferior de la gráfica se muestra el promedio, desviación estandar  los valores para n y p que se obtuvieron al realizar el ajuste de la gráfica. Si dese obtener más información acerca de lo que se realizó o los conceptos matemáticos utilizados, puede dirigirse a la pestaña de Teoria.""")
+    st.markdown("""Esta primera gráfica, muestra los resultados obtenidos en 100 lanzamientos hechos por Dessiré y Fabricio. En la inferior de la gráfica se muestra el promedio, desviación estandar  los valores para n y p que se obtuvieron al realizar el ajuste de la gráfica. Si desea obtener más información acerca de lo que se realizó o los conceptos matemáticos utilizados, puede dirigirse a la pestaña de Teoria.""")
     data = pd.read_csv('https://raw.githubusercontent.com/Fabricio-mencos/LabRedDat/main/Practicas/Practica1/Copia%20de%20ConteosDeCarasPorPareja%20-%20Sheet1%20(1).csv')
     
     #cantidad de tiros
